@@ -6,13 +6,13 @@ import java.util.Scanner;
 public class Menu {
     private FilaCaixa fila = new FilaCaixa();
 
-    private static Scanner scan = new Scanner(System.in);
+    private Scanner scan = new Scanner(System.in);
 
     public void init() {
         int op;
 
         while (true) {
-            System.out.println(" Opção 1 - Chamar próximo Cliente\n Opção 2 - Retirar Nova Senha");
+            System.out.print("+==================================+\n\t\t Menu de Opções\n\n Opção 1 - Chamar próximo Cliente\n Opção 2 - Retirar Nova Senha\n\n+==================================+\nDigite a opção: ");
             op = scan.nextInt();
 
             if (op == 1) {
@@ -20,7 +20,7 @@ public class Menu {
             } else if (op == 2) {
                 retirarNovaSenha();
             } else {
-                System.out.println("Finalizando a sessão atual do programa.");
+                System.out.println("\nOpção Fornecido Inválida, finalizando a sessão atual do programa.\n\n+==================================+");
                 break;
             }
         }
@@ -29,14 +29,14 @@ public class Menu {
     public void proximo() {
         Optional<String> proximo = fila.chamarProximo();
         if (proximo.isPresent()) {
-            System.out.println("Próximo Cliente se Apresente\nSenha: " + proximo.get());
+            System.out.println("\nPróximo cliente da fila, senha: " + proximo.get() + ", se dirija ao caixa.\n\n+==================================+\n");
         } else {
-            System.out.println("Não tem nenhum ser humano na fila");
+            System.out.println("\nNão tem mais nenhum cliente na fila, aguarde o próximo cliente chegar.\n\n+==================================+\n");
         }
     }
 
     public void retirarNovaSenha() {
-        System.out.println("Tem Prioridade?\n1 - Sim\n2 - Não");
+        System.out.print("\n+==================================+\nTem Prioridade?\n\n1 - Sim\n2 - Não\n\n+==================================+\nDigite a opção: ");
 
         int priority = scan.nextInt();
         boolean hasPrioridade;
@@ -46,10 +46,10 @@ public class Menu {
         } else if (priority == 2) {
             hasPrioridade = false;
         } else {
-            System.out.println("Opção fornecida inválida.");
+            System.out.println("\nOpção Fornecido Inválida, finalizando a sessão atual do programa.\n+==================================+\n");
             return;
         }
 
-        System.out.println("Senha Retirada: " + fila.adicionar(hasPrioridade));
+        System.out.println("\nSenha retirada: " + fila.adicionar(hasPrioridade) + "\n+==================================+\n");
     }
 }
