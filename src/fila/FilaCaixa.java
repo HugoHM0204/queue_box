@@ -1,26 +1,46 @@
 package fila;
 
+import java.util.LinkedList;
 import java.util.Optional;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 public class FilaCaixa {
-    private PriorityQueue<SenhaCliente> fila = new PriorityQueue<>();
+    private Queue<SenhaCliente> filaNormal = new LinkedList<>();
+    private Queue<SenhaCliente> filaPrioridade = new LinkedList<>();
+
+    private boolean priorityTurn = true;
 
     public FilaCaixa() {
     }
 
     public String adicionar(boolean hasPrioridade) {
-        SenhaCliente cliente = hasPrioridade ? new ClientePrioridade() : new ClienteNormal();
+        SenhaCliente cliente;
 
-        fila.offer(cliente);
+        if (hasPrioridade) {
+            cliente = new ClientePrioridade();
+            filaPrioridade.offer(cliente);
+        } else {
+            cliente = new ClienteNormal();
+            filaNormal.offer(cliente);
+
+        }
         return cliente.getSenha();
     }
 
-    public Optional<String> chamarProximo() {
-        return fila.isEmpty() ? Optional.empty() : Optional.of(fila.poll().getSenha());
+    public boolean isPriorityTurn() {
+        boolean aux = priorityTurn;
+
+        priorityTurn = !priorityTurn;
+
+        return aux;
     }
 
-    public Optional<String> previewProximo() {
-        return fila.isEmpty() ? Optional.empty() : Optional.of(fila.peek().getSenha());
+    public Optional<String> chamarProximo() {
+        if (isPriorityTurn()) {
+            return filaPrioridade.isEmpty() ? Optional.empty() : Optional.of(filaPrioridade.poll().getSenha());
+        } else {
+            return filaNormal.isEmpty() ? Optional.empty() : Optional.of(filaNormal.poll().getSenha());
+        }
     }
 }
