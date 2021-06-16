@@ -37,8 +37,8 @@ public class FilaCaixa {
     }
 
     public Optional<String> chamarProximo() {
-        if (isPriorityTurn()) {
-            return filaPrioridade.isEmpty() ? Optional.empty() : Optional.of(filaPrioridade.poll().getSenha());
+        if (isPriorityTurn() && !filaPrioridade.isEmpty()) {
+            return Optional.of(filaPrioridade.poll().getSenha());
         } else {
             return filaNormal.isEmpty() ? Optional.empty() : Optional.of(filaNormal.poll().getSenha());
         }
