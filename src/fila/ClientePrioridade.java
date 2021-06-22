@@ -33,9 +33,7 @@ public class ClientePrioridade implements SenhaCliente {
     @Override
     public int compareTo(SenhaCliente o) {
         if (o.getPrioridade() == this.getPrioridade()) {
-
             return this.getCodigo() - o.getCodigo();
-
         }
 
         return o.getPrioridade() - this.getPrioridade();

@@ -15,16 +15,19 @@ public class Menu {
         int op;
 
         while (true) {
-            System.out.print("+" + repeated + "+" + "\n\t\t Menu de Opções\n\n Opção 1 - Chamar próximo Cliente\n Opção 2 - Retirar Nova Senha\n\n" + "+" + repeated + "+\n" + "Digite a opção: ");
+            System.out.print("+" + repeated + "+" + "\n\t\t Menu de Opções\n\n Opção 1 - Chamar próximo Cliente\n" +
+                    " Opção 2 - Retirar Nova Senha\n Opção 3 - Sair\n\n" + "+" + repeated + "+\n" + "Digite a opção: ");
             op = scan.nextInt();
 
             if (op == 1) {
                 proximo();
             } else if (op == 2) {
                 retirarNovaSenha();
-            } else {
-                System.out.println("\nOpção Fornecido Inválida, finalizando a sessão atual do programa.\n\n" + "+" + repeated + "+");
+            } else if (op == 3) {
+                System.out.println("\nFinalizando a sessão atual do programa.\n\n" + "+" + repeated + "+");
                 break;
+            } else {
+                System.out.println("\nOpção inválida, tente novamente.\n");
             }
         }
     }
@@ -32,9 +35,9 @@ public class Menu {
     public void proximo() {
         Optional<String> proximo = fila.chamarProximo();
         if (proximo.isPresent()) {
-            System.out.println("\nPróximo cliente da fila, senha: " + proximo.get() + ", se dirija ao caixa.\n\n" + "+" + repeated + "+" + "\n");
+            System.out.println("\nPróximo cliente da fila, senha: " + proximo.get() + ", se dirija ao caixa.\n");
         } else {
-            System.out.println("\nNão tem mais nenhum cliente na fila, aguarde o próximo cliente chegar.\n\n" + "+" + repeated + "+" + "\n");
+            System.out.println("\nNão tem mais nenhum cliente na fila, aguarde o próximo cliente chegar.\n");
         }
     }
 
@@ -53,6 +56,6 @@ public class Menu {
             return;
         }
 
-        System.out.println("\nSenha retirada: " + fila.adicionar(hasPrioridade) + "\n" + "+" + repeated + "+\n");
+        System.out.println("\nSenha retirada: " + fila.adicionar(hasPrioridade));
     }
 }
