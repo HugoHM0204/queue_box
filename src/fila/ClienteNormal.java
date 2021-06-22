@@ -11,11 +11,6 @@ public class ClienteNormal implements SenhaCliente {
     }
 
     @Override
-    public int getPrioridade() {
-        return 1;
-    }
-
-    @Override
     public int getCodigo() {
         return codigo;
     }
@@ -28,16 +23,5 @@ public class ClienteNormal implements SenhaCliente {
     @Override
     public String getPrefixo() {
         return PREFIXO;
-    }
-
-    @Override
-    public int compareTo(SenhaCliente o) {
-        if (o.getPrioridade() == this.getPrioridade()) {
-
-            return this.getCodigo() - o.getCodigo();
-
-        }
-
-        return o.getPrioridade() - this.getPrioridade();
     }
 }

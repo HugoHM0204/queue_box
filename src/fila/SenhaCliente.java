@@ -1,7 +1,6 @@
 package fila;
 
-public interface SenhaCliente extends Comparable<SenhaCliente> {
-    int getPrioridade();
+public interface SenhaCliente {
     int getCodigo();
     int getProximoCodigo();
     String getPrefixo();
