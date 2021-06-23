@@ -1,6 +1,8 @@
+import view.MainWindow;
+
 public class App {
 
     public static void main(String[] args) {
-        new Menu().init();
+        new MainWindow();
     }
 }
